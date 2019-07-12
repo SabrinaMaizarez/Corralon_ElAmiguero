@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body>
+        <p:growl id="mens"/>
+        <p:panel header="Iniciar Sesion" footer="Corralon">
+            <h:form id="login">
+                <p:growl id="mensaje" showDetail="false" sticky="false"/>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="nombreUsuario" value="Nombre de Usuario: "/>
+                    <p:inputText id="nombreUsuario" required="true" value="#{loginFormBean.nombreUs}"/>
+                    <p:outputLabel for="passwUsuario" value="Contraseña: "/>
+                    <p:password id="passwUsuario" required="true" value="#{loginFormBean.passwUs}"/>
+                    <p:commandButton id="botonValidar" value="Ingresar" update=":mens" action="#{loginFormBean.validarUsuario()}"/>
+                    <p:commandLink value="Registrarse" process="@this" action="nuevoUsuario"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
+

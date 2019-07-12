@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Registro</title>
+    </h:head>
+    <h:body>
+        <h:form id="registro">
+            <p:growl id="mensajes" />
+            <p:panelGrid columns="2">
+                <p:outputLabel for="dni" value="Ingrese DNI" />
+                <p:inputNumber id="dni" required="true" value="#{usuarioFormBean.DNI}" decimalPlaces="0" minValue="1" maxValue="7000000000" size="30" placeholder="Escriba DNI" requiredMessage="Debe Ingresar su DNI" maxlength="8"/>
+                <p:outputLabel for="nombreUser" value="Ingrese Nombre de Usuario" />
+                <p:inputText id="nombreUser" required="true" value="#{usuarioFormBean.usuario.nombreUsuario}" placeholder="Nombre de Usuario" size="30" />
+                <p:outputLabel for="password" value="Ingrese contraseña" />
+                <p:inputText id="password" required="true" value="#{usuarioFormBean.usuario.password}" />
+                <p:outputLabel for="apellido" value="Ingrese Apellido" />
+                <p:inputText id="apellido" required="true" value="#{usuarioFormBean.usuario.apellidos}" />
+                <p:outputLabel for="nombre" value="Ingrese Nombre" />
+                <p:inputText id="nombre" required="true" value="#{usuarioFormBean.usuario.nombres}" />
+                <p:commandButton id="btnAgregarLoco" value="Crear Nuevo Usuario" action="#{usuarioFormBean.agregarUsuario()}" update="mensajes" icon="ui-icon-disk" />
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

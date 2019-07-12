@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Clientes</title>
+    </h:head>
+    <h:body>
+        <p:panel id="pnlProductos">
+            <p:growl id="mens" showDetail="true" />
+            <h:form id="frmComprarProductoPago">
+                <p:panelGrid columns="2">
+                    <p:commandButton id="btnComprar" value="Comprar" action="#{detalleFormBean.comprar()}"/>
+                </p:panelGrid>
+            </h:form>
+            <h:form id="frmProductos" enctype="multipart/form-data">
+                <p:dataGrid var="prod" value="#{productoFormBean.obtenerListadoProducto()}" columns="3" layout="grid" rows="12" paginator="true" id="prod">
+                    <f:facet name="header">
+                        Productos
+                    </f:facet>
+                    <p:panel header="#{prod.descripcion}" style="text-align:center">
+                        <h:panelGrid columns="2" style="width: 100%">
+                            <p:graphicImage value="#{productoFormBean.fotoProducto}" height="150px" width="300px">
+                                <f:param name="cod" value="#{prod.codProducto}"/>
+                            </p:graphicImage>
+                            <h:outputText value="$#{prod.precio}"/>
+                            <p:commandLink update=":frmProductos :dlgDetalles" oncomplete="PF('prodDialog').show()" title="Detalles" actionListener="#{detalleFormBean.establecerProducto(prod)}">
+                                <h:outputText value="detalles" style="margin:0 auto;" />
+                                <f:setPropertyActionListener value="#{prod}" target="#{prod}" />
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:dataGrid>
+            </h:form>
+        </p:panel>
+        <p:dialog id="dlgDetalles" header="Detalles" widgetVar="prodDialog" resizable="false" showEffect="explode" hideEffect="explode" modal="true">
+            <p:growl id="msgDetalles" showDetail="false" showSummary="true" sticky="false"/>
+            <h:form id="frmDetalles">
+                <p:panelGrid id="tblDet" columns="3">
+                    <p:outputLabel  for="nombreProducto" value="Nombre del producto"/>
+                    <p:outputLabel id="nombreProducto" value="#{detalleFormBean.unProducto.descripcion}"/>
+                    <p:outputLabel  for="Categoria" value="Categoria del Producto"/>
+                    <p:outputLabel id="Categoria" value="#{detalleFormBean.unProducto.categorias.nombre}"/>
+                    <p:outputLabel  for="Descripcion" value="Descripcion del Producto"/>
+                    <p:outputLabel id="Descripcion" value="#{detalleFormBean.unProducto.categorias.descripcion}"/>
+                    <p:outputLabel  for="Stock" value="Stock del Producto"/>
+                    <p:outputLabel id="Stock" value="#{detalleFormBean.unProducto.stock}"/>
+                    <p:outputLabel  for="Precio" value="Precio del Producto"/>
+                    <p:outputLabel id="Precio" value="#{detalleFormBean.unProducto.precio}"/>
+                    <p:commandButton id="btnDetalles" value="Agregar Carrito" actionListener="#{detalleFormBean.agregarCarrito()}" update=":mens" oncomplete="PF('prodDialog').hide()"/>
+                    <p:commandButton id="btnCerrarAgregarCarrito" value="Salir" oncomplete="PF('prodDialog').hide()" />
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+

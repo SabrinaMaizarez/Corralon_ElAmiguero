@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    <title>Factura</title>
+        <style>
+            @media print{
+                .boton1, .boton2{
+                display: none;
+                    } 
+                }
+        </style>
+    </h:head>
+    <h:body>
+        <h:panelGrid>
+            <p:panel header="CORRALON - El Amiguero" footer="2019"/>
+            <p:dataTable emptyMessage="No se ingreso ningun producto" var="3" value="ingrese la lista de los productos" >
+                <p:column headerText="Producto" >
+                    <p:outputLabel value="#{detalleFormBean.productosSeleccionados}"/>
+                </p:column> 
+                <p:column headerText="Cantidad">
+                    <p:outputLabel value="#{detalleFormBean.cantidad}"/>
+                </p:column>
+                <p:column headerText="Numero de Factura">
+                    <p:outputLabel value="#{detalleFormBean.factura.numFactura}"/>
+                </p:column>      
+                </p:dataTable>
+        </h:panelGrid>
+        <h:form>
+            <p:panelGrid class="pnl1" columns="2" >
+                <p:outputLabel value="Fecha de compra:"/>
+                <p:outputLabel value="#{detalleFormBean.factura.fecha}" />
+                <p:outputLabel value="Usuario: Nombre"/>
+                <p:outputLabel value="#{detalleFormBean.factura.usuarios.nombres}"/>
+                <p:outputLabel value="Usuario: Apellido"/>
+                <p:outputLabel value="#{detalleFormBean.factura.usuarios.apellidos}"/>
+                <p:outputLabel value="DNI:"/>
+                <p:outputLabel value="#{detalleFormBean.factura.usuarios.clientes.dni}"/>
+                <p:outputLabel value="Modo de pago"/>
+                <p:outputLabel value="#{detalleFormBean.modoPago.descripcion}"/>
+                <p:outputLabel value="Cantidad de cuotas:"/>
+                <p:outputLabel value="#{detalleFormBean.modoPago.cuotas}"/>
+                <p:outputLabel value="Total de compra:"/>
+                <p:outputLabel value="" />
+            </p:panelGrid>
+        </h:form>
+        <p:commandButton class="boton1"  value="Imprimir factura" onclick="print()" icon="ui-icon-print" />
+        <p:commandButton class="boton2"  value="Volver" icon="ui-icon-close" action="#{detalleFormBean.comprar()}" />
+    </h:body>  
+</html> 
